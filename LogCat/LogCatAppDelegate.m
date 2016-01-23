@@ -49,6 +49,14 @@
   [s setObject:[NSArchiver archivedDataWithRootObject:[NSColor orangeColor]] forKey:PREFS_LOG_WARNING_COLOR];
   [s setObject:[NSArchiver archivedDataWithRootObject:[NSColor redColor]]    forKey:PREFS_LOG_ERROR_COLOR];
   [s setObject:[NSArchiver archivedDataWithRootObject:[NSColor redColor]]    forKey:PREFS_LOG_FATAL_COLOR];
+   
+   //make sure the PREF_ADB_PATH does exist, else it will cause exception
+    NSObject * pathValue = [[NSUserDefaults standardUserDefaults] objectForKey:PREFS_ADB_PATH];
+    if (nil == pathValue ) {
+        NSString * adbPath = @"/Users/xxx/your/androidSDK/platform-tools/";
+        [[NSUserDefaults standardUserDefaults] setObject:adbPath forKey:PREFS_ADB_PATH];
+    }
+        
   [defaults registerDefaults:s];
 }
 
